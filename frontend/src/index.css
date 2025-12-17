@@ -1,0 +1,135 @@
+/* Tailwind CSS directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html,
+  body,
+  #root {
+    @apply h-full w-full overflow-hidden;
+  }
+
+  body {
+    @apply m-0 p-0 font-sans antialiased;
+    @apply bg-gray-50 dark:bg-gray-900;
+    @apply text-gray-900 dark:text-gray-100;
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* ReactFlow custom styles */
+  .react-flow__attribution {
+    @apply text-xs opacity-50;
+  }
+
+  .react-flow__controls {
+    @apply shadow-lg;
+  }
+
+  .react-flow__minimap {
+    @apply shadow-lg;
+  }
+
+  /* Table node styles */
+  .table-node {
+    @apply transition-all duration-200;
+  }
+
+  .table-node:hover {
+    @apply shadow-2xl;
+  }
+
+  /* Monaco Editor container */
+  .monaco-editor {
+    @apply font-mono;
+  }
+
+  /* Minimap table node styling */
+  .minimap-table-node {
+    @apply fill-primary-500 opacity-75;
+  }
+
+  /* Toast container customization */
+  .Toastify__toast {
+    @apply font-sans;
+  }
+
+  .Toastify__toast--success {
+    @apply bg-green-600 text-white;
+  }
+
+  .Toastify__toast--error {
+    @apply bg-red-600 text-white;
+  }
+
+  .Toastify__toast--warning {
+    @apply bg-yellow-600 text-white;
+  }
+
+  .Toastify__toast--info {
+    @apply bg-blue-600 text-white;
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  /* Custom scrollbar */
+  .scrollbar-thin::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500 dark:bg-gray-500;
+  }
+
+  /* Text selection */
+  ::selection {
+    @apply bg-primary-500 bg-opacity-30;
+  }
+}
+
+/* ReactFlow edge styles */
+.react-flow__edge-path {
+  @apply stroke-primary-500 dark:stroke-primary-400;
+  stroke-width: 2;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 5;
+  animation: dashdraw 0.5s linear infinite;
+}
+
+@keyframes dashdraw {
+  from {
+    stroke-dashoffset: 10;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ReactFlow connection line */
+.react-flow__connection-path {
+  @apply stroke-primary-500 dark:stroke-primary-400;
+  stroke-width: 2;
+}
+
+/* ReactFlow selection */
+.react-flow__node.selected .table-node {
+  @apply ring-4 ring-primary-500 ring-opacity-50;
+}
