@@ -24,10 +24,62 @@ This project consists of two main components:
 
 ### Prerequisites
 
+**Recommended (Docker/Podman)**:
+- Docker 20.10+ and Docker Compose 2.0+, OR
+- Podman 4.0+ and podman-compose
+
+**Alternative (Local Development)**:
 - Python 3.11+ (for backend)
 - Node.js 18+ and npm (for frontend)
 
-### 1. Start the Backend
+### Option 1: Docker Compose (Recommended)
+
+The fastest way to run the application is using Docker Compose:
+
+```bash
+# Using Docker
+docker-compose up --build
+
+# Using Podman
+podman-compose up --build
+
+# Or use the Makefile (see below)
+make up
+```
+
+The application will be available at:
+- **Frontend**: http://localhost:3005
+- **Backend API**: http://localhost:6005/api
+- **API Docs**: http://localhost:6005/docs
+
+See [DOCKER.md](./DOCKER.md) for detailed Docker deployment instructions.
+
+### Option 2: Using Makefile
+
+We provide a Makefile with convenient commands for both Docker and Podman:
+
+```bash
+# Start all services
+make up
+
+# Stop all services
+make down
+
+# View logs
+make logs
+
+# Rebuild and start
+make rebuild
+
+# See all available commands
+make help
+```
+
+### Option 3: Local Development
+
+For development with hot-reload:
+
+#### 1. Start the Backend
 
 ```bash
 cd backend
@@ -39,7 +91,7 @@ uvicorn main:app --reload
 
 The backend API will be available at `http://localhost:8000`
 
-### 2. Start the Frontend
+#### 2. Start the Frontend
 
 ```bash
 cd frontend
@@ -49,9 +101,11 @@ npm run dev
 
 The frontend will be available at `http://localhost:5173`
 
-### 3. Use the Application
+**Note**: For local development, update `frontend/.env` to use `http://localhost:8000/api`
 
-1. Open your browser to `http://localhost:5173`
+### Using the Application
+
+1. Open your browser to the frontend URL (http://localhost:3005 for Docker, http://localhost:5173 for local)
 2. Click "Load Example" to see sample DDL, or write your own
 3. Watch the ER diagram update automatically as you type
 4. Interact with the diagram (zoom, pan, select tables)
@@ -84,6 +138,8 @@ visualize-postgres/
 │   ├── parser.py        # DDL parsing logic
 │   ├── models.py        # Data models
 │   ├── tests/           # Test suite
+│   ├── Dockerfile       # Backend container config
+│   ├── .dockerignore    # Docker ignore patterns
 │   └── README.md        # Backend documentation
 │
 ├── frontend/            # React frontend application
@@ -91,9 +147,15 @@ visualize-postgres/
 │   │   ├── components/  # React components
 │   │   ├── utils/       # API, layout, export utilities
 │   │   └── types/       # TypeScript interfaces
+│   ├── Dockerfile       # Frontend container config
+│   ├── nginx.conf       # Nginx configuration
+│   ├── .dockerignore    # Docker ignore patterns
 │   ├── package.json
 │   └── README.md        # Frontend documentation
 │
+├── docker-compose.yml   # Container orchestration
+├── Makefile             # Build automation (Docker/Podman)
+├── DOCKER.md            # Docker deployment guide
 └── README.md            # This file
 ```
 
@@ -138,10 +200,52 @@ Interactive API documentation is available at:
 
 ## Development
 
+### Makefile Commands
+
+A comprehensive Makefile is provided with support for both Docker and Podman:
+
+```bash
+# View all available commands
+make help
+
+# Quick start/stop
+make up              # Start all services
+make down            # Stop all services
+make restart         # Restart all services
+
+# Building
+make build           # Build without starting
+make rebuild         # Rebuild and restart
+make up-build        # Build and start
+
+# Logs
+make logs            # All service logs
+make logs-backend    # Backend logs only
+make logs-frontend   # Frontend logs only
+
+# Individual services
+make backend         # Start backend only
+make frontend        # Start frontend only
+make backend-build   # Build backend only
+make frontend-build  # Build frontend only
+
+# Utilities
+make health          # Check service health
+make ps              # Show service status
+make clean           # Remove containers and volumes
+make dev-setup       # Setup local development (non-container)
+```
+
+The Makefile automatically detects whether you have Podman or Docker installed and uses the appropriate commands.
+
 ### Running Tests
 
 Backend tests:
 ```bash
+# With Makefile
+make test-backend
+
+# Or directly
 cd backend
 pytest tests/test_parser.py -v
 ```
