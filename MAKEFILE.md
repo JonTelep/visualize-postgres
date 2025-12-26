@@ -248,7 +248,7 @@ sudo make up
 You can override environment variables:
 
 ```bash
-# Use different ports (modify docker-compose.yml)
+# Use different ports (modify docker-compose.yaml)
 make up
 
 # Set Python to unbuffered mode (already default)

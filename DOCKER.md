@@ -39,7 +39,7 @@ This will:
 
 ### Changing Ports
 
-To change the exposed ports, edit the `docker-compose.yml` file:
+To change the exposed ports, edit the `docker-compose.yaml` file:
 
 ```yaml
 services:
@@ -126,14 +126,14 @@ docker-compose restart frontend
 
 ## Deployment on Coolify
 
-Coolify will automatically detect and use the `docker-compose.yml` file.
+Coolify will automatically detect and use the `docker-compose.yaml` file.
 
 ### Steps:
 
 1. Push your code to a Git repository (GitHub, GitLab, etc.)
 2. In Coolify, create a new application
 3. Select your repository
-4. Coolify will detect `docker-compose.yml` automatically
+4. Coolify will detect `docker-compose.yaml` automatically
 5. Configure environment variables if needed
 6. Deploy
 
@@ -142,7 +142,7 @@ Coolify will automatically detect and use the `docker-compose.yml` file.
 You can set these in Coolify's environment settings:
 
 **Backend**:
-- `PYTHONUNBUFFERED=1` (already set in docker-compose.yml)
+- `PYTHONUNBUFFERED=1` (already set in docker-compose.yaml)
 
 **Frontend**:
 - `VITE_API_BASE_URL` - Backend API URL (defaults to http://localhost:6005/api)
@@ -225,7 +225,7 @@ If ports 3005 or 6005 are in use:
 lsof -i :3005
 lsof -i :6005
 
-# Kill process or change ports in docker-compose.yml
+# Kill process or change ports in docker-compose.yaml
 ```
 
 ## Local Development vs Docker

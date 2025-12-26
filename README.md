@@ -153,7 +153,7 @@ visualize-postgres/
 │   ├── package.json
 │   └── README.md        # Frontend documentation
 │
-├── docker-compose.yml   # Container orchestration
+├── docker-compose.yaml   # Container orchestration
 ├── Makefile             # Build automation (Docker/Podman)
 ├── DOCKER.md            # Docker deployment guide
 └── README.md            # This file
