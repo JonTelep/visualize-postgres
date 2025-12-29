@@ -20,7 +20,8 @@ RUN npm run build
 FROM docker.io/library/nginx:alpine
 
 # Copy built assets from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+RUN mkdir -p /usr/share/nginx/html/postgres-visualizer
+COPY --from=build /app/dist /usr/share/nginx/html/postgres-visualizer
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
