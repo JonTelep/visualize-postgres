@@ -70,9 +70,19 @@ export function Toolbar({
             </svg>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-              Visualize Postgres
-            </h1>
+            <div className="flex items-baseline gap-2">
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                Visualize Postgres
+              </h1>
+              <a
+                href="https://telep.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              >
+                by telep.io
+              </a>
+            </div>
             <p className="text-xs text-gray-500 dark:text-gray-400">
               DDL to ER Diagram
             </p>
